@@ -1,6 +1,8 @@
 resource "google_container_cluster" "primary" {
   name                     = "${var.project_id}-gke"
   location                 = var.region
+  min_master_version       = "1.16.15-gke.4300"
+  //min_master_version       = "1.17.14-gke.1600"
 
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -15,6 +17,7 @@ resource "google_container_node_pool" "primary_nodes" {
   node_locations = ["${var.region}-a","${var.region}-b"]
   node_count     = var.gke_num_nodes
   version        = "1.16.15-gke.4300"
+  //version        = "1.17.14-gke.1600"
   
   node_config {
     oauth_scopes = [
